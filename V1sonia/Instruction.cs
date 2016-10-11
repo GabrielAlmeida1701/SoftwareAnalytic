@@ -11,9 +11,9 @@ namespace V1sonia
 
     }
 
-    class Operation
+    class Instruction
     {
-        public Operation()
+        public Instruction()
         {
 
         }

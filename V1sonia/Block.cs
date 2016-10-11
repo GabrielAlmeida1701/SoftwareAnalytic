@@ -10,40 +10,60 @@ namespace V1sonia
     {
         INICIO = 0, //main
         SE = 1,
-        RETORNAR = 2,
-        SE_NAO = 3,
+        SE_NAO = 2,
+        ENQUANTO = 3,
         PARA = 4 //for(;;){}
     }
 
     class Block
     {
         public BlockType type;
-        public List<Operation> operations;
-        public List<Block> childBlocks;
+        private List<Instruction> instructions;
+        private List<Block> childBlocks;
 
         public Block(BlockType b_type)
         {
             type = b_type;
         }
 
-        public void AddOperations(Operation op)
+        //SE, SE_NAO, ENQUANTO, PARA
+        public void AddCondition()
         {
-            operations.Add(op);
+
         }
 
-        public void RemoveOperation(Operation op)
+        //Add new "line operation"
+        public void AddInstruction(Instruction op)
         {
-            operations.Remove(op);
+            instructions.Add(op);
         }
 
+        //Remove line operation
+        public void RemoveInstruction(Instruction op)
+        {
+            instructions.Remove(op);
+        }
+        
+        //Attach
         public void AddChildBlock(Block n_block)
         {
             childBlocks.Add(n_block);
         }
 
+        //Detach
         public void RemoveChildBlock(Block b_toBeRemoved)
         {
             childBlocks.Remove(b_toBeRemoved);
+        }
+
+        public List<Block> GetChildBlocks()
+        {
+            return childBlocks;
+        }
+
+        public List<Instruction> GetInstructions()
+        {
+            return instructions;
         }
     }
 }
