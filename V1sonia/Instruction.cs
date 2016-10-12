@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace V1sonia
 {
-    public enum OperationType
-    {
-
-    }
-
     class Instruction
     {
-        public Instruction()
-        {
+        // ex: P = X * Y;
+        // ex: J = seila(); 
+        public String inst;
 
+        public Instruction(String i)
+        {
+            inst = i;
         }
     }
 }

@@ -20,17 +20,27 @@ namespace V1sonia
         public BlockType type;
         private List<Instruction> instructions;
         private List<Block> childBlocks;
+        private int loopIt;
 
         public Block(BlockType b_type)
         {
             type = b_type;
+
+            if (type != BlockType.ENQUANTO || type != BlockType.PARA)
+                loopIt = 0;
         }
 
         //SE, SE_NAO, ENQUANTO, PARA
-        public void AddCondition()
+        // ( i < j ) ( i != 10 ) ( i )
+        public void AddLoopCondition(int n)
         {
-
+            if(type == BlockType.ENQUANTO || type == BlockType.PARA)
+            {
+                loopIt = n;
+            }
         }
+
+        public int GetLoopItSize() { return loopIt; }
 
         //Add new "line operation"
         public void AddInstruction(Instruction op)
