@@ -41,6 +41,10 @@ namespace V1sonia
         public Block GetRelevantBlock()
         {
             //Analisar a maior condição e/ou instrução preferencial
+            foreach(Block b in mainBlock.GetChildBlocks())
+            {
+
+            }
 
             return new Block(0); //Retornar o bloco encontrado
         }
