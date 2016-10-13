@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace V1sonia
 {
-    class Engine
+    class Core
     {
         private int totalBlocksLength;
         private Block mainBlock;
 
-        public Engine()
+        public Core()
         {
         }
 
@@ -38,10 +38,9 @@ namespace V1sonia
             mainBlock = b;
         }
 
-        public List<Block> GetRelevantBlocks()
+        public List<Block> GetLoopBlocks()
         {
             List<Block> loopBlocks = new List<Block>();
-            List<Block> condBlocks = new List<Block>();
 
             //Separa os blocos
             foreach(Block b in mainBlock.GetChildBlocks())
@@ -50,19 +49,17 @@ namespace V1sonia
                 {
                     loopBlocks.Add(b);
                 }
-                else if(b.type != BlockType.INICIO)
-                {
-                    condBlocks.Add(b);
-                }
             }
 
             //Analista os dois tipos de blocos..
-            if(loopBlocks.Count > 0)
+            if (loopBlocks.Count > 0)
             {
-
+                return loopBlocks;
             }
-
-            return new Block(0); //Retornar o bloco encontrado
+            else
+            {
+                return new List<Block>();
+            }
         }
 
         public int GetInstrSize(Block b)
