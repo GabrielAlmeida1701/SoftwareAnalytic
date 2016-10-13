@@ -13,7 +13,7 @@ namespace V1sonia
             Core core = new Core();
 
             core.CreateMainBlock();
-            Block loop1 = core.CreateBlock(BlockType.ENQUANTO, core.mainBlock);
+            Block loop1 = core.CreateLoopBlock(BlockType.ENQUANTO, core.mainBlock, 15);
             Instruction inst = new Instruction("a = b + c");
             Instruction inst2 = new Instruction("b = b + a");
             loop1.AddInstruction(inst); 

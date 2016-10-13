@@ -8,7 +8,6 @@ namespace V1sonia
 {
     class Core
     {
-        private int totalBlocksLength;
         public Block mainBlock;
         public List<Block> allBlocks;
 
@@ -17,19 +16,20 @@ namespace V1sonia
             allBlocks = new List<Block>();
         }
 
-        public Block CreateBlock(BlockType type, Block parent)
+        public Block CreateCondBlock(BlockType type, Block parent)
         {
             Block b = new Block(type);
             parent.AddChildBlock(b);
             allBlocks.Add(b);
             return b;
         }
-        public void CreateLoopBlock(BlockType type, Block parent, int itControl)
+        public Block CreateLoopBlock(BlockType type, Block parent, int itControl)
         {
             Block b = new Block(type);
             b.AddLoopCondition(itControl);
             allBlocks.Add(b);
             parent.AddChildBlock(b);
+            return b;
         }
 
         public void CreateMainBlock()
@@ -44,7 +44,7 @@ namespace V1sonia
             List<Block> loopBlocks = new List<Block>();
 
             //Separa os blocos
-            foreach(Block b in mainBlock.GetChildBlocks())
+            foreach(Block b in allBlocks)
             {
                 if(b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
                 {

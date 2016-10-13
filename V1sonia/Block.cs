@@ -52,7 +52,6 @@ namespace V1sonia
                 loopIt = n;
             }
         }
-
         public int GetLoopItSize() { return loopIt; }
 
         //Add new "line operation"
