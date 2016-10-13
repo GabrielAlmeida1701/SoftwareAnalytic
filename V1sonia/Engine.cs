@@ -38,10 +38,26 @@ namespace V1sonia
             mainBlock = b;
         }
 
-        public Block GetRelevantBlock()
+        public List<Block> GetRelevantBlocks()
         {
-            //Analisar a maior condição e/ou instrução preferencial
+            List<Block> loopBlocks = new List<Block>();
+            List<Block> condBlocks = new List<Block>();
+
+            //Separa os blocos
             foreach(Block b in mainBlock.GetChildBlocks())
+            {
+                if(b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
+                {
+                    loopBlocks.Add(b);
+                }
+                else if(b.type != BlockType.INICIO)
+                {
+                    condBlocks.Add(b);
+                }
+            }
+
+            //Analista os dois tipos de blocos..
+            if(loopBlocks.Count > 0)
             {
 
             }
@@ -49,9 +65,9 @@ namespace V1sonia
             return new Block(0); //Retornar o bloco encontrado
         }
 
-        public int GetInstructionSizeByBlock(Block b)
+        public int GetInstrSize(Block b)
         {
-            return 1;
+            return b.GetInstructions().Count;
         }
     }
 }
