@@ -20,18 +20,19 @@ namespace V1sonia
             Block b = new Block(type);
             mainBlock.AddChildBlock(b);
         }
-        public void CreateBlock(BlockType type, int itControl)
+        public void CreateLoopBlock(BlockType type, int itControl)
         {
             Block b = new Block(type);
             b.AddLoopCondition(itControl);
             mainBlock.AddChildBlock(b);
         }
 
-        public void InsertInstruction(Block b, Instruction inst)
+        public void AddInstruction(Block b, Instruction inst)
         {
             Block block = mainBlock.GetChildBlocks().Find(x => x == b);
             block.AddInstruction(inst);
         }
+
         public void CreateMainBlock()
         {
             Block b = new Block(BlockType.INICIO);
@@ -62,7 +63,7 @@ namespace V1sonia
             }
         }
 
-        public int GetInstrSize(Block b)
+        public int GetInstrCount(Block b)
         {
             return b.GetInstructions().Count;
         }

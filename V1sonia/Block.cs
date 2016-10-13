@@ -15,6 +15,7 @@ namespace V1sonia
         PARA = 4 //for(;;){}
     }
 
+    //Adicionar a representação do bloco.. imagem, componente, string.. whatever
     class Block
     {
         public BlockType type;
