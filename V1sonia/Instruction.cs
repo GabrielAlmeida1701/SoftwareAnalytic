@@ -11,8 +11,14 @@ namespace V1sonia
         // ex: P = X * Y;
         // ex: J = seila(); 
         public String inst;
+        public Block block; //Bloco aonde esta instrução está
 
         public Instruction(String i)
+        {
+            inst = i;
+        }
+
+        public void Edit(String i)
         {
             inst = i;
         }
