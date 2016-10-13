@@ -42,8 +42,6 @@ namespace V1sonia
         public List<Block> GetLoopBlocks()
         {
             List<Block> loopBlocks = new List<Block>();
-
-            //Separa os blocos
             foreach(Block b in allBlocks)
             {
                 if(b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
@@ -51,8 +49,6 @@ namespace V1sonia
                     loopBlocks.Add(b);
                 }
             }
-
-            //Analista os dois tipos de blocos..
             if (loopBlocks.Count > 0)
             {
                 return loopBlocks;
