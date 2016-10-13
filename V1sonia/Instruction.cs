@@ -13,14 +13,20 @@ namespace V1sonia
         public String inst;
         public Block block; //Bloco aonde esta instrução está
 
+        public Instruction()
+        {
+        }
+
         public Instruction(String i)
         {
             inst = i;
         }
 
-        public void Edit(String i)
+        public void Set(String i)
         {
             inst = i;
         }
+
+        public Block getParent() { return block; }
     }
 }

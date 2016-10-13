@@ -9,34 +9,34 @@ namespace V1sonia
     class Core
     {
         private int totalBlocksLength;
-        private Block mainBlock;
+        public Block mainBlock;
+        public List<Block> allBlocks;
 
         public Core()
         {
+            allBlocks = new List<Block>();
         }
 
-        public void CreateBlock(BlockType type)
+        public Block CreateBlock(BlockType type, Block parent)
         {
             Block b = new Block(type);
-            mainBlock.AddChildBlock(b);
+            parent.AddChildBlock(b);
+            allBlocks.Add(b);
+            return b;
         }
-        public void CreateLoopBlock(BlockType type, int itControl)
+        public void CreateLoopBlock(BlockType type, Block parent, int itControl)
         {
             Block b = new Block(type);
             b.AddLoopCondition(itControl);
-            mainBlock.AddChildBlock(b);
-        }
-
-        public void AddInstruction(Block b, Instruction inst)
-        {
-            Block block = mainBlock.GetChildBlocks().Find(x => x == b);
-            block.AddInstruction(inst);
+            allBlocks.Add(b);
+            parent.AddChildBlock(b);
         }
 
         public void CreateMainBlock()
         {
             Block b = new Block(BlockType.INICIO);
             mainBlock = b;
+            allBlocks.Add(b);
         }
 
         public List<Block> GetLoopBlocks()

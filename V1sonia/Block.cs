@@ -19,16 +19,28 @@ namespace V1sonia
     class Block
     {
         public BlockType type;
-        private List<Instruction> instructions;
-        private List<Block> childBlocks;
+        private List<Instruction> instructions = new List<Instruction>();
+        private List<Block> childBlocks = new List<Block>();
         private int loopIt;
+        public Guid InstanceID { get; private set; }
 
         public Block(BlockType b_type)
         {
             type = b_type;
 
-            if (type != BlockType.ENQUANTO || type != BlockType.PARA)
-                loopIt = 0;
+           switch(type)
+            {
+                case BlockType.ENQUANTO:
+                    Console.WriteLine("Bloco ENQUANTO criado");
+                    loopIt = 0;
+                    break;
+                case BlockType.SE:
+                    Console.WriteLine("Bloco SE criado");
+                    break;
+                case BlockType.SE_NAO:
+                    Console.WriteLine("Bloco SE NAO criado");
+                    break;
+            }
         }
 
         //SE, SE_NAO, ENQUANTO, PARA
