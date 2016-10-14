@@ -63,9 +63,9 @@ namespace V1sonia
             {
                 foreach (Block b in block.GetChildBlocks())
                 {
-                    for (int i = 1; i <= contIdent; i++)
+                    for (int i = 1; i <= core.getHierarchOfBlock(block); i++)
                     {
-                        Console.Write(" ");
+                        Console.Write("\t");
                     }
                     if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA) //loop block
                         Console.WriteLine("[ENQUANTO {0}] hierarch: {1}", b.GetLoopItSize(), core.getHierarchOfBlock(b));
@@ -77,9 +77,9 @@ namespace V1sonia
                     {
                         foreach (Instruction instr in b.GetInstructions())
                         {
-                            for (int i = 1; i <= contIdent; i++)
+                            for (int i = 1; i <= core.getHierarchOfBlock(block); i++)
                             {
-                                Console.Write("|");
+                                Console.Write("\t");
                             }
                             Console.WriteLine( instr.inst);
                         }

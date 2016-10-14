@@ -10,14 +10,17 @@ namespace V1sonia
     {
         public Block mainBlock;
         public List<Block> allBlocks;
+        public int nBlocks;
 
         public Core()
         {
+            nBlocks = 0;
             allBlocks = new List<Block>();
         }
 
         public Block CreateCondBlock(BlockType type, Block parent)
         {
+            nBlocks++;
             Block b = new Block(type);
 
             parent.AddChildBlock(b);
@@ -27,6 +30,7 @@ namespace V1sonia
         }
         public Block CreateLoopBlock(BlockType type, Block parent, int itControl)
         {
+            nBlocks++;
             Block b = new Block(type);
             b.motherBlock = parent; //cria bloco mae
             b.AddLoopCondition(itControl);

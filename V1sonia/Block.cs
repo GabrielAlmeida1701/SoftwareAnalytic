@@ -23,12 +23,13 @@ namespace V1sonia
         private List<Instruction> instructions = new List<Instruction>();
         private List<Block> childBlocks = new List<Block>();
         public Block motherBlock;
-        public int hierarch; 
+        public int id;
         private int loopIt;
         public Guid InstanceID { get; private set; }
 
         public Block(BlockType b_type)
         {
+            id = 0;
             type = b_type;
 
            switch(type)
