@@ -19,13 +19,16 @@ namespace V1sonia
         public Block CreateCondBlock(BlockType type, Block parent)
         {
             Block b = new Block(type);
+
             parent.AddChildBlock(b);
+            b.motherBlock = parent; //cria bloco mae
             allBlocks.Add(b);
             return b;
         }
         public Block CreateLoopBlock(BlockType type, Block parent, int itControl)
         {
             Block b = new Block(type);
+            b.motherBlock = parent; //cria bloco mae
             b.AddLoopCondition(itControl);
             allBlocks.Add(b);
             parent.AddChildBlock(b);
@@ -42,9 +45,9 @@ namespace V1sonia
         public List<Block> GetLoopBlocks()
         {
             List<Block> loopBlocks = new List<Block>();
-            foreach(Block b in allBlocks)
+            foreach (Block b in allBlocks)
             {
-                if(b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
+                if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
                 {
                     loopBlocks.Add(b);
                 }
@@ -62,6 +65,41 @@ namespace V1sonia
         public int GetInstrCount(Block b)
         {
             return b.GetInstructions().Count;
+        }
+
+        public List<Block> GetCondBlocks()
+        {
+            List<Block> condBlocks = new List<Block>();
+            foreach (Block b in allBlocks)
+            {
+                if (b.type == BlockType.SE || b.type == BlockType.SE_NAO)
+                {
+                    condBlocks.Add(b);
+                }
+
+
+            }
+
+            if (condBlocks.Count() > 0)
+                return condBlocks;
+            return new List<Block>();
+        }
+
+        public int getHierarchOfBlock(Block parent)
+        {
+            Block b = parent;
+            int contHierarch = 0;
+            while(true)
+            {
+                if(parent.type != BlockType.INICIO)
+                parent = parent.motherBlock;
+
+                else if (parent.type == BlockType.INICIO)
+                    break;
+                contHierarch++;
+                //Console.WriteLine("ESTE: " + b.type);
+            }
+            return contHierarch;
         }
     }
 }

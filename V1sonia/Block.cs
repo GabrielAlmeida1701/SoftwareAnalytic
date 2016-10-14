@@ -12,7 +12,8 @@ namespace V1sonia
         SE = 1,
         SE_NAO = 2,
         ENQUANTO = 3,
-        PARA = 4 //for(;;){}
+        PARA = 4, //for(;;){}
+        AUX = 5
     }
 
     //Adicionar a representação do bloco.. imagem, componente, string.. whatever
@@ -21,6 +22,8 @@ namespace V1sonia
         public BlockType type;
         private List<Instruction> instructions = new List<Instruction>();
         private List<Block> childBlocks = new List<Block>();
+        public Block motherBlock;
+        public int hierarch; 
         private int loopIt;
         public Guid InstanceID { get; private set; }
 

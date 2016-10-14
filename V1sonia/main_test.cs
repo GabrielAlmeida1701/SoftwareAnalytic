@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace V1sonia
     {
         public static void Main()
         {
+            AlgorithmAnalysis teste1 = new AlgorithmAnalysis();
+            Console.WriteLine("Iniciando verificacao... ");
+            teste1.VerifyAlgorithm(teste1.core.mainBlock);
+            Console.WriteLine();
+            Console.Read();
+
+            /*
             Core core = new Core();
 
             core.CreateMainBlock();
@@ -57,7 +65,7 @@ namespace V1sonia
                             Console.WriteLine("\t\t" + instr.inst);
                         }
                 }
-            }
+            }*/
         }
     }
 }

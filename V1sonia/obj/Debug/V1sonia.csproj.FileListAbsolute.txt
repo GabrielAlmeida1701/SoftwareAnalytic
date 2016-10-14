@@ -18,3 +18,11 @@ C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.pdb
 C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csprojResolveAssemblyReference.cache
 C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Properties.Resources.resources
 C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csproj.GenerateResource.Cache
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe.config
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.exe
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.pdb
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.pdb
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csprojResolveAssemblyReference.cache
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Properties.Resources.resources
+C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csproj.GenerateResource.Cache
