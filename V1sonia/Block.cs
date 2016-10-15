@@ -26,13 +26,15 @@ namespace V1sonia
         public int id;
         private int loopIt;
         public Guid InstanceID { get; private set; }
+        public int blockComplexity;
 
         public Block(BlockType b_type)
         {
+            blockComplexity = 0;
             id = 0;
             type = b_type;
 
-           switch(type)
+            switch (type)
             {
                 case BlockType.ENQUANTO:
                     Console.WriteLine("Bloco ENQUANTO criado");
@@ -51,7 +53,7 @@ namespace V1sonia
         // ( i < j ) ( i != 10 ) ( i )
         public void AddLoopCondition(int n)
         {
-            if(type == BlockType.ENQUANTO || type == BlockType.PARA)
+            if (type == BlockType.ENQUANTO || type == BlockType.PARA)
             {
                 loopIt = n;
             }
@@ -69,7 +71,7 @@ namespace V1sonia
         {
             instructions.Remove(op);
         }
-        
+
         //Attach
         public void AddChildBlock(Block n_block)
         {

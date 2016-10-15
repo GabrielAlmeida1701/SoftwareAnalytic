@@ -48,8 +48,8 @@
   <ItemGroup>
     <Compile Include="AlgorithmAnalysis.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="Complexity.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Grafo.cs" />
     <Compile Include="Instruction.cs" />
     <Compile Include="main_test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
