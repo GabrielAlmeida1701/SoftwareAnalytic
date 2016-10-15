@@ -51,7 +51,7 @@ public List<Instruction> GetInstructions()
 ```
 
 # Classe Core
-A classe Core será chamada pelo programa principal para manipular os blocos e retornar informações sobre eles.
+A classe Core será chamada pelo programa principal para manipular os blocos, retornar informações sobre eles e é aonde o bloco principal ou bloco cabeça é armazenado.
 ```csharp
 //Bloco principal ou Bloco Cabeça.
 public Block mainBlock;
