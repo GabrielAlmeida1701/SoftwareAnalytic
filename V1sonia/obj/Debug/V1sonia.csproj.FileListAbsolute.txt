@@ -30,3 +30,12 @@ C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Form1.resource
 C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe.config
 C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.exe
 C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe.config
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.exe
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csprojResolveAssemblyReference.cache
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Form1.resources
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Properties.Resources.resources
+C:\Users\Gabriel\Documents\Visual Studio 2015\Projects\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csproj.GenerateResource.Cache

@@ -17,7 +17,7 @@ namespace V1sonia
     }
 
     //Adicionar a representação do bloco.. imagem, componente, string.. whatever
-    class Block
+    public class Block
     {
         public BlockType type;
         private List<Instruction> instructions = new List<Instruction>();

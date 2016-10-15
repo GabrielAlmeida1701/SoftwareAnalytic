@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace V1sonia
 {
-    class Core
+    public class Core
     {
         public Block mainBlock;
         public List<Block> allBlocks;

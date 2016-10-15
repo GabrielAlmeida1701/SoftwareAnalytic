@@ -55,6 +55,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Front\Block_img.cs" />
     <Compile Include="Grafo.cs" />
     <Compile Include="Instruction.cs" />
     <Compile Include="Program.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace V1sonia
 {
-    class Instruction
+    public class Instruction
     {
         // ex: P = X * Y;
         // ex: J = seila(); 
