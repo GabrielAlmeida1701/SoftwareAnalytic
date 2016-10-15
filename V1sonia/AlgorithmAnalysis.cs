@@ -33,8 +33,6 @@ namespace V1sonia
             core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0].AddInstruction(inst);
 
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
-
-
         }
 
         public void DefineGeneralComplexity(Block block) //define a complexidade geral de cada bloco de acordo com seu tipo
@@ -65,7 +63,6 @@ namespace V1sonia
 
         public void CreateListComplexity(Block block) //cria uma lista que contem a complexidade de cada bloco do main
         {
-
             if (block.GetChildBlocks().Count() > 0)
             {
                 foreach (Block b in block.GetChildBlocks())
@@ -98,7 +95,6 @@ namespace V1sonia
                     Console.WriteLine(instr.inst);
                 }
             }
-
 
             if (block.GetChildBlocks().Count() > 0)
             {
@@ -160,7 +156,13 @@ namespace V1sonia
         {
             if(core.GetLoopBlocks(core.mainBlock.GetChildBlocks()).Count > 0)
             {
-               
+                foreach(Block b in core.mainBlock.GetChildBlocks())
+                {
+                    if(b.type == BlockType.LOOP)
+                    {
+
+                    }
+                }
             }
             else
             {

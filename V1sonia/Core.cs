@@ -88,10 +88,10 @@ namespace V1sonia
             return b.GetInstructions().Count;
         }
 
-        public List<Block> GetCondBlocks()
+        public List<Block> GetCondBlocks(List<Block> blocks)
         {
             List<Block> condBlocks = new List<Block>();
-            foreach (Block b in allBlocks)
+            foreach (Block b in blocks)
             {
                 if (b.type == BlockType.SE || b.type == BlockType.SE_NAO)
                 {
