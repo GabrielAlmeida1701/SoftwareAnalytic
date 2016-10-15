@@ -27,3 +27,6 @@ C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\D
 C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Properties.Resources.resources
 C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csproj.GenerateResource.Cache
 C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Form1.resources
+C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\bin\Debug\V1sonia.exe.config
+C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.exe
+C:\Users\NoteFelipe\Documents\GitHub\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.pdb

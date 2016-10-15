@@ -21,5 +21,10 @@ namespace V1sonia
         {
 
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
