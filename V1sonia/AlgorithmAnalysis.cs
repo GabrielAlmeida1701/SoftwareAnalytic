@@ -158,6 +158,14 @@ namespace V1sonia
         }
         public int LoopUnderLoop() //função do thômas e seus amigos
         {
+            if(core.GetLoopBlocks(core.mainBlock.GetChildBlocks()).Count > 0)
+            {
+               
+            }
+            else
+            {
+
+            }
             return nRepeatLoop;
         }
     }

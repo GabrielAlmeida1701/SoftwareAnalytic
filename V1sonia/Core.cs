@@ -63,10 +63,10 @@ namespace V1sonia
             allBlocks.Add(b);
         }
 
-        public List<Block> GetLoopBlocks()
+        public List<Block> GetLoopBlocks(List<Block> blocks)
         {
             List<Block> loopBlocks = new List<Block>();
-            foreach (Block b in allBlocks)
+            foreach (Block b in blocks)
             {
                 if (b.type == BlockType.LOOP)
                 {
