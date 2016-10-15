@@ -32,7 +32,7 @@ namespace V1sonia.Front
 
         private void button2_Click(object sender, EventArgs e) {
             BlockType t = BlockType.ENQUANTO;
-            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
+            //blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
 
             Render();
         }

@@ -22,9 +22,9 @@ namespace V1sonia.Front {
         public Block block;
         public Block father;
 
-        private MainWindow window;
+        private Form1 window;
 
-        public Block_img(BlockType type, Block block, MainWindow window) {
+        public Block_img(BlockType type, Block block, Form1 window) {
             this.block = block;
             this.window = window;
             position = GetStartPosition();
@@ -44,8 +44,8 @@ namespace V1sonia.Front {
             }
 
             top = Properties.Resources.tst_Top;
-            left = Image.FromFile("C:\\asd\\tst_btn.png");
-            button = Image.FromFile("C:\\asd\\tst_btn.png");
+            left = Properties.Resources.tst_btn;
+            button = Properties.Resources.tst_btn;
         }
 
         public void DrawBlock(Graphics g) {
@@ -105,15 +105,15 @@ namespace V1sonia.Front {
             int count = window.core.mainBlock.GetChildBlocks().Count;
 
             if (count == 1) {
-                pos.X = 50;
-                pos.Y = 50;
+                pos.X = window.group_bnts.Width + 50;
+                pos.Y = 120;
             } else {
                 int size = 50;
-                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count-1; i++) {
                     size += window.blocks[i].size;
                 }
 
-                pos.X = 50;
+                pos.X = window.group_bnts.Width + 50;
                 pos.Y = (30*(count-1)) + size + Y + ((count-2) * Y);
             }
 
