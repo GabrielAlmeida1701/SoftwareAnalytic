@@ -26,3 +26,4 @@ C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\bin\D
 C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csprojResolveAssemblyReference.cache
 C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Properties.Resources.resources
 C:\Users\Rhanyel Rodrigues\Documents\Dev\SONIA V1\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.csproj.GenerateResource.Cache
+C:\Users\amils\Desktop\SoftwareAnalytic\V1sonia\obj\Debug\V1sonia.Form1.resources
