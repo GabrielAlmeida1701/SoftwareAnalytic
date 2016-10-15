@@ -26,7 +26,7 @@ namespace V1sonia
             core.mainBlock.AddInstruction(inst2);
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
-            core.CreateLoopBlock(BlockType.PARA, core.allBlocks[2], 10);
+            core.CreateLoopBlock(BlockType.LOOP, core.allBlocks[2], 10);
             core.allBlocks[2].GetChildBlocks()[0].AddInstruction(inst2);
             core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0]);
             core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0]);
@@ -39,14 +39,12 @@ namespace V1sonia
 
         public void DefineGeneralComplexity(Block block) //define a complexidade geral de cada bloco de acordo com seu tipo
         {
-
             if (block.type == BlockType.INICIO || block.type == BlockType.SE || block.type == BlockType.SE_NAO)
             {
                 block.blockComplexity = block.GetInstructions().Count;
             }
 
-
-            else if (block.type == BlockType.ENQUANTO || block.type == BlockType.PARA)
+            else if (block.type == BlockType.LOOP)
             {
                 block.blockComplexity = block.GetLoopItSize();
                 block.blockComplexity *= block.GetInstructions().Count;
@@ -115,7 +113,7 @@ namespace V1sonia
                     if (block.type == BlockType.INICIO)
                         Console.Write("\n BlockID: " + b.id.ToString() + " -> ");
 
-                    if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA) //loop block
+                    if (b.type == BlockType.LOOP) //loop block
                     {
                         Console.WriteLine("[ENQUANTO {0}] hierarch: {1}", b.GetLoopItSize(), core.getHierarchOfBlock(b));
 

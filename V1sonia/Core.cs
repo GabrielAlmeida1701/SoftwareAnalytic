@@ -68,7 +68,7 @@ namespace V1sonia
             List<Block> loopBlocks = new List<Block>();
             foreach (Block b in allBlocks)
             {
-                if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
+                if (b.type == BlockType.LOOP)
                 {
                     loopBlocks.Add(b);
                 }
@@ -97,10 +97,7 @@ namespace V1sonia
                 {
                     condBlocks.Add(b);
                 }
-
-
             }
-
             if (condBlocks.Count() > 0)
                 return condBlocks;
             return new List<Block>();
