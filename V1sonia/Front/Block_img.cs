@@ -43,7 +43,7 @@ namespace V1sonia.Front {
                     break;
             }
 
-            top = Image.FromFile("C:\\asd\\tst_top.png");
+            top = Properties.Resources.tst_Top;
             left = Image.FromFile("C:\\asd\\tst_btn.png");
             button = Image.FromFile("C:\\asd\\tst_btn.png");
         }
