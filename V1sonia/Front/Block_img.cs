@@ -13,7 +13,7 @@ namespace V1sonia.Front {
 
         public int X = 180;
         public int Y = 30;
-        public int size;
+        public int size = 90;
 
         public Point position;
 
@@ -53,7 +53,7 @@ namespace V1sonia.Front {
             g.DrawImage(left, position.X, position.Y + Y, 20, GetHeight());
             g.DrawImage(button, position.X, position.Y + Y + GetHeight(), X, Y/2);
 
-            size = (position.Y - Y / 2) + Y + GetHeight() + Y + (Y / 2);
+            //size = (position.Y - Y / 2) + Y + GetHeight() + Y + (Y / 2);
             if (block == window.getSelect_Block()) {
                 g.DrawLine(Pens.Red, new Point(position.X - 10, position.Y), new Point(position.X - 10, size));//left
                 g.DrawLine(Pens.Red, new Point(position.X + X + 10, position.Y), new Point(position.X + X + 10, size));//right
@@ -102,20 +102,30 @@ namespace V1sonia.Front {
 
         public Point GetStartPosition() {
             Point pos = new Point(0, 0);
-            int count = window.core.mainBlock.GetChildBlocks().Count;
 
-            if (count == 1) {
+            Block main = window.core.mainBlock;
+            int final_size = 80;
+
+            if(window.blocks.Count == 0) {
                 pos.X = window.group_bnts.Width + 50;
                 pos.Y = 120;
-            } else {
-                int size = 50;
-                for (int i = 0; i < count-1; i++) {
-                    size += window.blocks[i].size;
-                }
 
-                pos.X = window.group_bnts.Width + 50;
-                pos.Y = (30*(count-1)) + size + Y + ((count-2) * Y);
+                return pos;
             }
+
+            foreach (Block b in main.GetChildBlocks()) {
+                int index = main.GetChildBlocks().IndexOf(b);
+                if(index < window.blocks.Count - 2) {
+                    final_size += window.blocks[index].size;
+                }
+            }
+
+            Block blk = block.motherBlock;
+            while(blk != main) {
+
+            }
+
+            pos.X = window.group_bnts.Width + 50;
 
             return pos;
         }
