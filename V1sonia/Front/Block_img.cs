@@ -52,8 +52,7 @@ namespace V1sonia.Front {
             g.DrawImage(top, position.X, position.Y, X, Y);
             g.DrawImage(left, position.X, position.Y + Y, 20, GetHeight());
             g.DrawImage(button, position.X, position.Y + Y + GetHeight(), X, Y/2);
-
-            //size = (position.Y - Y / 2) + Y + GetHeight() + Y + (Y / 2);
+            
             if (block == window.getSelect_Block()) {
                 g.DrawLine(Pens.Red, new Point(position.X - 10, position.Y), new Point(position.X - 10, size));//left
                 g.DrawLine(Pens.Red, new Point(position.X + X + 10, position.Y), new Point(position.X + X + 10, size));//right
@@ -103,29 +102,43 @@ namespace V1sonia.Front {
         public Point GetStartPosition() {
             Point pos = new Point(0, 0);
 
-            Block main = window.core.mainBlock;
-            int final_size = 80;
-
-            if(window.blocks.Count == 0) {
+            Block mother = block.motherBlock;
+            int final_size = 90;
+            
+            if (window.blocks.Count == 0) {
                 pos.X = window.group_bnts.Width + 50;
                 pos.Y = 120;
 
                 return pos;
             }
 
-            foreach (Block b in main.GetChildBlocks()) {
-                int index = main.GetChildBlocks().IndexOf(b);
-                if(index < window.blocks.Count - 2) {
+            if (mother.GetChildBlocks().Count == 1) {
+                int index_m = window.core.allBlocks.IndexOf(mother) - 1;
+                
+                pos.X = window.blocks[index_m].position.X;
+                pos.Y = window.blocks[index_m].position.Y;
+
+                return pos;
+            }
+
+            foreach (Block b in mother.GetChildBlocks()) {
+                int index = mother.GetChildBlocks().IndexOf(b);
+                if(index < window.blocks.Count-1) {
+                    Console.WriteLine("Size = " + window.blocks[index].size);
                     final_size += window.blocks[index].size;
                 }
             }
 
             Block blk = block.motherBlock;
-            while(blk != main) {
-
+            int x = 0;
+            while(blk != window.core.mainBlock) {
+                x += 20;
+                blk = blk.motherBlock;
             }
 
-            pos.X = window.group_bnts.Width + 50;
+            Console.WriteLine("Final size = " + final_size);
+            pos.X = (window.group_bnts.Width + 50) + x;
+            pos.Y = 90 + final_size - ((window.blocks.Count - 1) * Y);
 
             return pos;
         }

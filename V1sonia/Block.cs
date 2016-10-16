@@ -35,14 +35,14 @@ namespace V1sonia
            switch(type)
             {
                 case BlockType.ENQUANTO:
-                    Console.WriteLine("Bloco ENQUANTO criado");
+                    //Console.WriteLine("Bloco ENQUANTO criado");
                     loopIt = 0;
                     break;
                 case BlockType.SE:
-                    Console.WriteLine("Bloco SE criado");
+                    //Console.WriteLine("Bloco SE criado");
                     break;
                 case BlockType.SE_NAO:
-                    Console.WriteLine("Bloco SE NAO criado");
+                    //Console.WriteLine("Bloco SE NAO criado");
                     break;
             }
         }
