@@ -101,6 +101,24 @@
   <ItemGroup>
     <None Include="Resources\tst_Top.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\else_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\else_top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\if_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\if_top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\while_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\while_Top.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -78,6 +78,7 @@
             this.while_bnt.TabIndex = 3;
             this.while_bnt.Text = "Enquanto(while)";
             this.while_bnt.UseVisualStyleBackColor = false;
+            this.while_bnt.Click += new System.EventHandler(this.while_bnt_Click);
             // 
             // else_bnt
             // 
@@ -89,6 +90,7 @@
             this.else_bnt.TabIndex = 2;
             this.else_bnt.Text = "Se não(else)";
             this.else_bnt.UseVisualStyleBackColor = false;
+            this.else_bnt.Click += new System.EventHandler(this.else_bnt_Click);
             // 
             // if_bnt
             // 

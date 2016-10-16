@@ -54,12 +54,27 @@ namespace V1sonia
         private void if_bnt_Click(object sender, EventArgs e) {
             BlockType t = BlockType.SE;
             blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
+            
+            Render();
+        }
+
+        private void else_bnt_Click(object sender, EventArgs e) {
+            BlockType t = BlockType.SE_NAO;
+            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
+
+            Render();
+        }
+
+        private void while_bnt_Click(object sender, EventArgs e) {
+            BlockType t = BlockType.ENQUANTO;
+            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
 
             Render();
         }
 
         private void Render() {
             g.Clear(Color.White);
+            //ResetPositions();
 
             foreach (Block_img b in blocks)
                 b.DrawBlock(g);
@@ -96,6 +111,31 @@ namespace V1sonia
                 return null;
 
             return blocks[i];
+        }
+
+        void ResetPositions() {
+            Block main = core.mainBlock;
+
+            for (int i = 0; i < main.GetChildBlocks().Count; i++) {
+                if (i == 0) {
+                    int index = core.allBlocks.IndexOf(main.GetChildBlocks()[i]) - 1;
+                    Point pos = new Point(0, 0);
+
+                    pos.X = group_bnts.Width + 50;
+                    pos.Y = 120;
+
+                    blocks[index].position = pos;
+                } else {
+                    int index = core.allBlocks.IndexOf(main.GetChildBlocks()[i]) - 1;
+                    int before = core.allBlocks.IndexOf(main.GetChildBlocks()[i-1]) - 1;
+                    Point pos = new Point(0, 0);
+
+                    pos.X = group_bnts.Width + 50;
+                    pos.Y = 90 + blocks[before].size - ((blocks.Count - 1) * 30);
+
+                    blocks[index].position = pos;
+                }
+            }
         }
     }
 }

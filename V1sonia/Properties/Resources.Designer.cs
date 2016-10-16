@@ -63,9 +63,9 @@ namespace V1sonia.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tst_btn {
+        internal static System.Drawing.Bitmap else_btn {
             get {
-                object obj = ResourceManager.GetObject("tst_btn", resourceCulture);
+                object obj = ResourceManager.GetObject("else_btn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,49 @@ namespace V1sonia.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tst_Top {
+        internal static System.Drawing.Bitmap else_top {
             get {
-                object obj = ResourceManager.GetObject("tst_Top", resourceCulture);
+                object obj = ResourceManager.GetObject("else_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_btn {
+            get {
+                object obj = ResourceManager.GetObject("if_btn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap if_top {
+            get {
+                object obj = ResourceManager.GetObject("if_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap while_btn {
+            get {
+                object obj = ResourceManager.GetObject("while_btn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap while_Top {
+            get {
+                object obj = ResourceManager.GetObject("while_Top", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

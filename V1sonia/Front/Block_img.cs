@@ -31,21 +31,27 @@ namespace V1sonia.Front {
             click_box = new Rectangle(position.X, position.Y, X, Y);
 
             switch (type) {
-                case BlockType.INICIO:
-                    break;
                 case BlockType.ENQUANTO:
+                    top = Properties.Resources.while_Top;
+                    left = Properties.Resources.while_btn;
+                    button = Properties.Resources.while_btn;
                     break;
                 case BlockType.PARA:
+                    top = Properties.Resources.while_Top;
+                    left = Properties.Resources.while_btn;
+                    button = Properties.Resources.while_btn;
                     break;
                 case BlockType.SE:
+                    top = Properties.Resources.if_top;
+                    left = Properties.Resources.if_btn;
+                    button = Properties.Resources.if_btn;
                     break;
                 case BlockType.SE_NAO:
+                    top = Properties.Resources.else_top;
+                    left = Properties.Resources.else_btn;
+                    button = Properties.Resources.else_btn;
                     break;
             }
-
-            top = Properties.Resources.tst_Top;
-            left = Properties.Resources.tst_btn;
-            button = Properties.Resources.tst_btn;
         }
 
         public void DrawBlock(Graphics g) {
@@ -60,8 +66,6 @@ namespace V1sonia.Front {
                 g.DrawLine(Pens.Red, new Point(position.X - 10, position.Y), new Point(position.X + X + 10, position.Y));//top
                 g.DrawLine(Pens.Red, new Point(position.X - 10, size), new Point(position.X + X + 10, size));//down
             }
-
-            //g.DrawString("If", new Font(FontFamily.Families[2], 20), Brushes.Black, 0, 0);
         }
 
         public Block_img SetFather(Block block) {
@@ -81,7 +85,7 @@ namespace V1sonia.Front {
             for (int i = 0; i < block.GetChildBlocks().Count; i++)
                 childCount += block.GetChildBlocks()[i].GetChildBlocks().Count;
 
-            childCount = (childCount != 0) ? childCount * 30 + 50 : 30;
+            childCount = (childCount != 0) ? childCount * 30 + 90 : 30;
 
             return childCount;
         }
@@ -124,19 +128,17 @@ namespace V1sonia.Front {
             foreach (Block b in mother.GetChildBlocks()) {
                 int index = mother.GetChildBlocks().IndexOf(b);
                 if(index < window.blocks.Count-1) {
-                    Console.WriteLine("Size = " + window.blocks[index].size);
                     final_size += window.blocks[index].size;
                 }
             }
 
             Block blk = block.motherBlock;
-            int x = 0;
+            int x = (blk == window.core.mainBlock)? 0 : -20;
             while(blk != window.core.mainBlock) {
                 x += 20;
                 blk = blk.motherBlock;
             }
-
-            Console.WriteLine("Final size = " + final_size);
+            
             pos.X = (window.group_bnts.Width + 50) + x;
             pos.Y = 90 + final_size - ((window.blocks.Count - 1) * Y);
 
