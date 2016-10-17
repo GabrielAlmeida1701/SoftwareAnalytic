@@ -13,6 +13,7 @@ namespace V1sonia
 {
     public partial class Form1 : Form
     {
+        public Point global;
 
         Graphics g;
         public List<Block_img> blocks;
@@ -28,6 +29,7 @@ namespace V1sonia
             group_bnts = panel1;
 
             core = new Core();
+            global = new Point();
 
             core.CreateMainBlock();
             selected_block = core.mainBlock;
@@ -66,7 +68,7 @@ namespace V1sonia
         }
 
         private void while_bnt_Click(object sender, EventArgs e) {
-            BlockType t = BlockType.ENQUANTO;
+            BlockType t = BlockType.LOOP;
             blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
 
             Render();
@@ -74,7 +76,7 @@ namespace V1sonia
 
         private void Render() {
             g.Clear(Color.White);
-            //ResetPositions();
+            PreRender(core.mainBlock);
 
             foreach (Block_img b in blocks)
                 b.DrawBlock(g);
@@ -82,11 +84,8 @@ namespace V1sonia
 
         private Block CreateBlock(BlockType type) {
             switch (type) {
-                case BlockType.ENQUANTO:
-                    return core.CreateLoopBlock(BlockType.ENQUANTO, selected_block, 15);
-
-                case BlockType.PARA:
-                    return core.CreateLoopBlock(BlockType.ENQUANTO, selected_block, 15);
+                case BlockType.LOOP:
+                    return core.CreateLoopBlock(BlockType.LOOP, selected_block, 15);
 
                 case BlockType.SE:
                     return core.CreateCondBlock(BlockType.SE, selected_block);
@@ -102,7 +101,9 @@ namespace V1sonia
             selected_block = new_select;
         }
 
-        public Block getSelect_Block() { return selected_block; }
+        public Block getSelect_Block() {
+            return selected_block;
+        }
 
         public Block_img getBlock_img(Block block) {
             int i = core.allBlocks.IndexOf(block);
@@ -110,32 +111,34 @@ namespace V1sonia
             if (i == -1)
                 return null;
 
-            return blocks[i];
+            return blocks[i-1];
+        }
+        
+        void PreRender(Block main) {
+            int index = GetIndexBlock(main);
+            
+            for (int i = 0; i < main.GetChildBlocks().Count; i++) {
+                Point pos = new Point(0, 0);
+                pos.X = group_bnts.Width + 50;
+                pos.Y = (i == 0) ? 120 : 120+60 * i;// 120 * i + blocks[GetIndexBlock(main.GetChildBlocks()[i - 1])].size + 40;
+
+                blocks[i].position = pos;
+            }
         }
 
-        void ResetPositions() {
-            Block main = core.mainBlock;
+        public int GetIndexBlock(Block block) {
+            return core.allBlocks.IndexOf(block) - 1;
+        }
 
-            for (int i = 0; i < main.GetChildBlocks().Count; i++) {
-                if (i == 0) {
-                    int index = core.allBlocks.IndexOf(main.GetChildBlocks()[i]) - 1;
-                    Point pos = new Point(0, 0);
+        private void down_Click(object sender, EventArgs e) {
+            global.Y += 10;
+            Render();
+        }
 
-                    pos.X = group_bnts.Width + 50;
-                    pos.Y = 120;
+        private void up_Click(object sender, EventArgs e) {
+            global.Y -= 10;
 
-                    blocks[index].position = pos;
-                } else {
-                    int index = core.allBlocks.IndexOf(main.GetChildBlocks()[i]) - 1;
-                    int before = core.allBlocks.IndexOf(main.GetChildBlocks()[i-1]) - 1;
-                    Point pos = new Point(0, 0);
-
-                    pos.X = group_bnts.Width + 50;
-                    pos.Y = 90 + blocks[before].size - ((blocks.Count - 1) * 30);
-
-                    blocks[index].position = pos;
-                }
-            }
+            Render();
         }
     }
 }

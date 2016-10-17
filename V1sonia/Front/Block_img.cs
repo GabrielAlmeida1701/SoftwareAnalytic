@@ -13,14 +13,14 @@ namespace V1sonia.Front {
 
         public int X = 180;
         public int Y = 30;
-        public int size = 90;
+        public int size = 30;
 
         public Point position;
 
         private Rectangle click_box;
 
-        public Block block;
-        public Block father;
+        Block block;
+        Block father;
 
         private Form1 window;
 
@@ -28,15 +28,10 @@ namespace V1sonia.Front {
             this.block = block;
             this.window = window;
             position = GetStartPosition();
-            click_box = new Rectangle(position.X, position.Y, X, Y);
+            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
 
             switch (type) {
-                case BlockType.ENQUANTO:
-                    top = Properties.Resources.while_Top;
-                    left = Properties.Resources.while_btn;
-                    button = Properties.Resources.while_btn;
-                    break;
-                case BlockType.PARA:
+                case BlockType.LOOP:
                     top = Properties.Resources.while_Top;
                     left = Properties.Resources.while_btn;
                     button = Properties.Resources.while_btn;
@@ -55,16 +50,16 @@ namespace V1sonia.Front {
         }
 
         public void DrawBlock(Graphics g) {
-            g.DrawImage(top, position.X, position.Y, X, Y);
-            g.DrawImage(left, position.X, position.Y + Y, 20, GetHeight());
-            g.DrawImage(button, position.X, position.Y + Y + GetHeight(), X, Y/2);
+            g.DrawImage(top, PositionX(), PositionY(), X, Y);
+            g.DrawImage(left, PositionX(), PositionY() + Y, 20, size);
+            g.DrawImage(button, PositionX(), PositionY() + Y + size, X, Y/2);
             
             if (block == window.getSelect_Block()) {
-                g.DrawLine(Pens.Red, new Point(position.X - 10, position.Y), new Point(position.X - 10, size));//left
-                g.DrawLine(Pens.Red, new Point(position.X + X + 10, position.Y), new Point(position.X + X + 10, size));//right
+                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY()), new Point(PositionX() - 10, PositionY() + 30));//left
+                g.DrawLine(Pens.Red, new Point(PositionX() + X + 10, PositionY()), new Point(PositionX() + X + 10, PositionY() + 30));//right
 
-                g.DrawLine(Pens.Red, new Point(position.X - 10, position.Y), new Point(position.X + X + 10, position.Y));//top
-                g.DrawLine(Pens.Red, new Point(position.X - 10, size), new Point(position.X + X + 10, size));//down
+                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY()), new Point(PositionX() + X + 10, PositionY()));//top
+                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY() + 30), new Point(PositionX() + X + 10, PositionY() + 30));//down
             }
         }
 
@@ -73,10 +68,15 @@ namespace V1sonia.Front {
 
             if (father != window.core.mainBlock) {
                 position.X += 20;
-                position.Y += Y * block.GetChildBlocks().Count;
+                position.Y += 22;
             }
 
-            click_box = new Rectangle(position.X, position.Y, X, Y);
+            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
+            while (block != window.core.mainBlock) {
+                window.getBlock_img(father).size += 55;
+                block = block.motherBlock;
+            }
+
             return this;
         }
 
@@ -90,15 +90,11 @@ namespace V1sonia.Front {
             return childCount;
         }
 
-        public int GetAcctualHeight() {
-            return (position.Y - Y / 2) + Y + GetHeight() + Y + (Y / 2);
-        }
-
         public bool CheckClicks(Point e) {
-            if (click_box.Contains(e)) {
+            e.Y -= window.global.Y;
+
+            if (click_box.Contains(e))
                 window.setSelect_Block(block);
-                Console.WriteLine("poop \n\n");
-            }
 
             return click_box.Contains(e);
         }
@@ -143,6 +139,14 @@ namespace V1sonia.Front {
             pos.Y = 90 + final_size - ((window.blocks.Count - 1) * Y);
 
             return pos;
+        }
+
+        public int PositionX() {
+            return position.X + window.global.X;
+        }
+
+        public int PositionY() {
+            return position.Y + window.global.Y;
         }
     }
 }

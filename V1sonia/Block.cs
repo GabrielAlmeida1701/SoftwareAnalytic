@@ -11,9 +11,8 @@ namespace V1sonia
         INICIO = 0, //main
         SE = 1,
         SE_NAO = 2,
-        ENQUANTO = 3,
-        PARA = 4, //for(;;){}
-        AUX = 5
+        LOOP = 3,
+        AUX = 4
     }
 
     //Adicionar a representação do bloco.. imagem, componente, string.. whatever
@@ -26,23 +25,25 @@ namespace V1sonia
         public int id;
         private int loopIt;
         public Guid InstanceID { get; private set; }
+        public int blockComplexity;
 
         public Block(BlockType b_type)
         {
+            blockComplexity = 0;
             id = 0;
             type = b_type;
 
-           switch(type)
+            switch (type)
             {
-                case BlockType.ENQUANTO:
-                    //Console.WriteLine("Bloco ENQUANTO criado");
+                case BlockType.LOOP:
+                    Console.WriteLine("Bloco LOOP criado");
                     loopIt = 0;
                     break;
                 case BlockType.SE:
-                    //Console.WriteLine("Bloco SE criado");
+                    Console.WriteLine("Bloco SE criado");
                     break;
                 case BlockType.SE_NAO:
-                    //Console.WriteLine("Bloco SE NAO criado");
+                    Console.WriteLine("Bloco SE NAO criado");
                     break;
             }
         }
@@ -51,7 +52,7 @@ namespace V1sonia
         // ( i < j ) ( i != 10 ) ( i )
         public void AddLoopCondition(int n)
         {
-            if(type == BlockType.ENQUANTO || type == BlockType.PARA)
+            if (type == BlockType.LOOP)
             {
                 loopIt = n;
             }
@@ -69,7 +70,7 @@ namespace V1sonia
         {
             instructions.Remove(op);
         }
-        
+
         //Attach
         public void AddChildBlock(Block n_block)
         {

@@ -36,6 +36,8 @@
             this.if_bnt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.remove_bnt = new System.Windows.Forms.Button();
+            this.up = new System.Windows.Forms.Button();
+            this.down = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,12 +129,34 @@
             this.remove_bnt.Text = "Remover";
             this.remove_bnt.UseVisualStyleBackColor = false;
             // 
+            // up
+            // 
+            this.up.Location = new System.Drawing.Point(577, 337);
+            this.up.Name = "up";
+            this.up.Size = new System.Drawing.Size(37, 37);
+            this.up.TabIndex = 3;
+            this.up.Text = "▲";
+            this.up.UseVisualStyleBackColor = true;
+            this.up.Click += new System.EventHandler(this.up_Click);
+            // 
+            // down
+            // 
+            this.down.Location = new System.Drawing.Point(577, 380);
+            this.down.Name = "down";
+            this.down.Size = new System.Drawing.Size(37, 37);
+            this.down.TabIndex = 4;
+            this.down.Text = "▼";
+            this.down.UseVisualStyleBackColor = true;
+            this.down.Click += new System.EventHandler(this.down_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(633, 432);
+            this.Controls.Add(this.down);
+            this.Controls.Add(this.up);
             this.Controls.Add(this.remove_bnt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -156,5 +180,7 @@
         private System.Windows.Forms.Button if_bnt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button remove_bnt;
+        private System.Windows.Forms.Button up;
+        private System.Windows.Forms.Button down;
     }
 }

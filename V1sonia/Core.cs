@@ -22,7 +22,14 @@ namespace V1sonia
         {
             nBlocks++;
             Block b = new Block(type);
-
+            if (parent.type == BlockType.INICIO)
+            {
+                b.id = this.mainBlock.GetChildBlocks().Count;
+            }
+            else
+            {
+                b.id = parent.id;
+            }
             parent.AddChildBlock(b);
             b.motherBlock = parent; //cria bloco mae
             allBlocks.Add(b);
@@ -32,6 +39,16 @@ namespace V1sonia
         {
             nBlocks++;
             Block b = new Block(type);
+
+            if (parent.type == BlockType.INICIO)
+            {
+                b.id = this.mainBlock.GetChildBlocks().Count;
+            }
+            else
+            {
+                b.id = parent.id;
+            }
+
             b.motherBlock = parent; //cria bloco mae
             b.AddLoopCondition(itControl);
             allBlocks.Add(b);
@@ -46,12 +63,12 @@ namespace V1sonia
             allBlocks.Add(b);
         }
 
-        public List<Block> GetLoopBlocks()
+        public List<Block> GetLoopBlocks(List<Block> blocks)
         {
             List<Block> loopBlocks = new List<Block>();
-            foreach (Block b in allBlocks)
+            foreach (Block b in blocks)
             {
-                if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA)
+                if (b.type == BlockType.LOOP)
                 {
                     loopBlocks.Add(b);
                 }
@@ -71,19 +88,16 @@ namespace V1sonia
             return b.GetInstructions().Count;
         }
 
-        public List<Block> GetCondBlocks()
+        public List<Block> GetCondBlocks(List<Block> blocks)
         {
             List<Block> condBlocks = new List<Block>();
-            foreach (Block b in allBlocks)
+            foreach (Block b in blocks)
             {
                 if (b.type == BlockType.SE || b.type == BlockType.SE_NAO)
                 {
                     condBlocks.Add(b);
                 }
-
-
             }
-
             if (condBlocks.Count() > 0)
                 return condBlocks;
             return new List<Block>();
@@ -93,17 +107,30 @@ namespace V1sonia
         {
             Block b = parent;
             int contHierarch = 0;
-            while(true)
+            while (true)
             {
-                if(parent.type != BlockType.INICIO)
-                parent = parent.motherBlock;
+                if (parent.type != BlockType.INICIO)
+                    parent = parent.motherBlock;
 
                 else if (parent.type == BlockType.INICIO)
                     break;
                 contHierarch++;
-                //Console.WriteLine("ESTE: " + b.type);
             }
             return contHierarch;
+        }
+
+        public Block GetBlockChildMainById(int id)
+        {
+            if (this.mainBlock.GetChildBlocks().Count > 0)
+            {
+                foreach (Block b in this.mainBlock.GetChildBlocks())
+                {
+                    if (b.id == id)
+                        return b;
+                }
+            }
+
+            return new Block(BlockType.AUX);
         }
     }
 }

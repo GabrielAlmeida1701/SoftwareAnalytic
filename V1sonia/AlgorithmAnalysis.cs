@@ -8,88 +8,176 @@ namespace V1sonia
 {
     class AlgorithmAnalysis
     {
+        private List<int> complexityList; //lista de complexidades de cada bloco do main
         public Core core;
-        int nInstrTotal; //numero de instruções total
-        Block atualMotherBlock;
+        public int nInstrTotal; //numero de instruções total
+        int nRepeatLoop;
+        int complexityBlock = 0;
+        int complexityAll = 0;
 
         public AlgorithmAnalysis()
         {
+
+            nRepeatLoop = 0;
+            complexityList = new List<int>();
             nInstrTotal = 0;
             core = new Core();
             core.CreateMainBlock();
-            
+
             Instruction inst = new Instruction("a = 1");
             Instruction inst2 = new Instruction("b = 3");
             core.mainBlock.AddInstruction(inst);
             core.mainBlock.AddInstruction(inst2);
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
-            core.CreateLoopBlock(BlockType.PARA, core.allBlocks[2], 10);
+            core.CreateLoopBlock(BlockType.LOOP, core.allBlocks[2], 10);
             core.allBlocks[2].GetChildBlocks()[0].AddInstruction(inst2);
             core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0]);
             core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0]);
             core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0].AddInstruction(inst);
 
             core.CreateCondBlock(BlockType.SE, core.mainBlock);
+        }
 
+        public void DefineGeneralComplexity(Block block) //define a complexidade geral de cada bloco de acordo com seu tipo
+        {
+            if (block.type == BlockType.INICIO || block.type == BlockType.SE || block.type == BlockType.SE_NAO)
+            {
+                block.blockComplexity += block.GetInstructions().Count;
 
+                if (block.GetChildBlocks().Count > 0)
+                {
+                    foreach (Block b in block.GetChildBlocks())
+                    {
+                        block.blockComplexity += Complexity(b);
+                    }
+                }
+            }
+
+            else if (block.type == BlockType.LOOP)
+            {
+                Complexity(block);
+            }
+        }
+
+        public int Complexity(Block b)
+        {
+            complexityBlock = 0;
+
+            if (b.type == BlockType.LOOP) //LOOP INSIDE LOOP
+            {
+                if (b.GetInstructions().Count > 0 && b.GetChildBlocks().Count == 0)
+                {
+                    return b.GetInstructions().Count * b.GetLoopItSize();
+                }
+                else
+                {
+                    if (b.GetInstructions().Count > 0)
+                    {
+                        complexityBlock += b.GetInstructions().Count * b.GetLoopItSize();
+                    }
+
+                    foreach (Block child in b.GetChildBlocks())
+                    {
+                        complexityBlock += Complexity(child);
+                    }
+                    return complexityBlock;
+                }
+            }
+            else // SE 
+            {
+                b.blockComplexity += b.GetInstructions().Count;
+
+                if (b.GetChildBlocks().Count > 0)
+                {
+                    foreach (Block child in b.GetChildBlocks())
+                    {
+                        complexityBlock += Complexity(b);
+                    }
+                }
+
+                return complexityBlock;
+            }
 
         }
-        int contIdent = 0;
-        public void VerifyAlgorithm(Block block)
-        {
 
+        public Block GetBlockMaxComplexity() //pega o bloco de maior complexidade contido no main
+        {
+            int max = 0;
+
+            CreateListComplexity(core.mainBlock);
+
+            for (int i = 0; i < complexityList.Count(); i++)
+            {
+                if (complexityList[i] > max)
+                    max = i;
+            }
+
+            return core.GetBlockChildMainById(max);
+        }
+        /*
+         public int GetBlockMaxComplexity1() //pega o bloco de maior complexidade contido no main
+         {
+             int max = 0;
+
+             CreateListComplexity(core.mainBlock);
+
+             if(core.mainBlock.GetChildBlocks().Count > 0)
+             {
+                 for (int i = 0; i < complexityList.Count(); i++)
+                 {
+                     if (complexityList[i] > max)
+                         max = i;
+                 }
+
+                 return core.GetBlockChildMainById(max).blockComplexity;
+             }
+             else
+             {
+                 return nInstrTotal;
+             }
+         }
+        */
+
+        public void CreateListComplexity(Block block) //cria uma lista que contem a complexidade de cada bloco do main
+        {
+            if (block.GetChildBlocks().Count() > 0)
+            {
+                foreach (Block b in block.GetChildBlocks())
+                {
+                    if (block.type == BlockType.INICIO)
+                    {
+                        complexityList.Add(b.blockComplexity);
+                    }
+
+                    else
+                    {
+                        complexityList[b.id] += b.blockComplexity;
+                    }
+                    CreateListComplexity(b);
+                }
+            }
+        }
+
+        public void VerifyAlgorithm(Block block) //indenta algoritmo
+        {
+            DefineGeneralComplexity(block);
 
             if (block == core.mainBlock) //main block
             {
-                atualMotherBlock = new Block(BlockType.AUX);
                 foreach (Instruction instr in block.GetInstructions()) //list all instructions inside mainblock
                 {
-                    Console.WriteLine(instr.inst);
+                    nInstrTotal++;
                 }
             }
-
-            else
-            {
-                if(atualMotherBlock != block.motherBlock)
-                {
-                    contIdent++;
-                }
-                    
-            }
-            
 
             if (block.GetChildBlocks().Count() > 0)
             {
                 foreach (Block b in block.GetChildBlocks())
                 {
-                    for (int i = 1; i <= core.getHierarchOfBlock(block); i++)
-                    {
-                        Console.Write("\t");
-                    }
-                    if (b.type == BlockType.ENQUANTO || b.type == BlockType.PARA) //loop block
-                        Console.WriteLine("[ENQUANTO {0}] hierarch: {1}", b.GetLoopItSize(), core.getHierarchOfBlock(b));
-
-                    else //condition block
-                        Console.WriteLine("[BLOCO DE CONDICAO] hierarch: {0}", core.getHierarchOfBlock(b));
-
-                    if (b.GetInstructions().Count > 0)
-                    {
-                        foreach (Instruction instr in b.GetInstructions())
-                        {
-                            for (int i = 1; i <= core.getHierarchOfBlock(block); i++)
-                            {
-                                Console.Write("\t");
-                            }
-                            Console.WriteLine( instr.inst);
-                        }
-                    }
-
-
                     nInstrTotal += b.GetInstructions().Count();
                     VerifyAlgorithm(b);
                 }
-
             }
         }
     }
