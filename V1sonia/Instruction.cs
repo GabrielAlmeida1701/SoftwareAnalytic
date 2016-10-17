@@ -12,6 +12,7 @@ namespace V1sonia
         // ex: J = seila(); 
         public String inst;
         public Block block; //Bloco aonde esta instrução está
+        public int id;
 
         public Instruction()
         {

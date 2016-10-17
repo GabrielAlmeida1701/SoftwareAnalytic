@@ -111,6 +111,7 @@
             this.remove_bnt.TabIndex = 2;
             this.remove_bnt.Text = "Remover";
             this.remove_bnt.UseVisualStyleBackColor = false;
+            this.remove_bnt.Click += new System.EventHandler(this.remove_bnt_Click);
             // 
             // up
             // 

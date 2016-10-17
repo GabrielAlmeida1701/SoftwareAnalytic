@@ -121,7 +121,7 @@ namespace V1sonia
                 Point pos = new Point(0, 0);
                 pos.X = group_bnts.Width + 50;
                 pos.Y = (i == 0) ? 120 : 120 + 60 * i + GetYPosition(main.GetChildBlocks()[i]);
-
+                List<Block> bs = core.allBlocks;
                 int id = blocks.IndexOf(getBlock_img(main.GetChildBlocks()[i]));
                 blocks[id].position = pos;
             }
@@ -159,8 +159,19 @@ namespace V1sonia
             foreach (Block b in main.GetChildBlocks())
                 analysis.VerifyAlgorithm(b);
 
-            compx.Text = 
+            compx.Text = "Complexidade: "+
             analysis.GetBlockMaxComplexity().blockComplexity.ToString();
+        }
+
+        private void remove_bnt_Click(object sender, EventArgs e) {
+            if(selected_block != core.mainBlock) {
+                blocks.Remove(getBlock_img(selected_block));
+                selected_block.motherBlock.GetChildBlocks().Remove(selected_block);
+                core.allBlocks.Remove(selected_block);
+            }
+
+            selected_block = core.mainBlock;
+            Render();
         }
     }
 }

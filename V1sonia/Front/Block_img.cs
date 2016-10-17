@@ -20,7 +20,8 @@ namespace V1sonia.Front {
         private Rectangle click_box;
 
         public Block block;
-        Block father;
+        public List<Instruction> instroctions = new List<Instruction>();
+        private Block father;
 
         private Form1 window;
 
@@ -48,11 +49,6 @@ namespace V1sonia.Front {
             }
         }
 
-        public Block_img(Instruction instruction, Form1 window) {
-            this.window = window;
-            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
-        }
-
         public void DrawBlock(Graphics g) {
             click_box = new Rectangle(PositionX(), PositionY(), X, Y);
 
@@ -62,7 +58,7 @@ namespace V1sonia.Front {
 
             if (Text != "")
                 g.DrawString(Text, new Font(FontFamily.Families[3], 18), Brushes.Black, PositionX() + 80, PositionY() + 2);
-
+            
             if (block == window.getSelect_Block()) {
                 g.DrawLine(Pens.Red, click_box.Location, new Point(click_box.X + click_box.Width, click_box.Y));//top
                 g.DrawLine(Pens.Red, click_box.Location, new Point(click_box.X, click_box.Y + click_box.Height));//left
