@@ -78,6 +78,13 @@ namespace V1sonia
             g.Clear(Color.White);
             PreRender(core.mainBlock);
 
+            for(int i=0; i<core.mainBlock.GetInstructions().Count; i++) {
+                g.DrawImage(Properties.Resources.inst, group_bnts.Width + 50, 90 + global.Y - (i * 30), 180, 30);
+                
+                g.DrawString(core.mainBlock.GetInstructions()[i].inst
+                    , new Font(FontFamily.Families[3], 18), Brushes.Black, group_bnts.Width + 50, 90 + global.Y - (i * 30));
+            }
+
             foreach (Block_img b in blocks)
                 b.DrawBlock(g);
         }
