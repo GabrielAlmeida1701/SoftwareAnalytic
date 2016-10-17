@@ -48,7 +48,7 @@
             this.panel1.Controls.Add(this.while_bnt);
             this.panel1.Controls.Add(this.else_bnt);
             this.panel1.Controls.Add(this.if_bnt);
-            this.panel1.Location = new System.Drawing.Point(12, 86);
+            this.panel1.Location = new System.Drawing.Point(12, 71);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(195, 269);
             this.panel1.TabIndex = 0;

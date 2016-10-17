@@ -43,8 +43,7 @@ namespace V1sonia
 
             foreach (Block_img b in blocks) {
                 bool beer = b.CheckClicks(e.Location);
-                if (beer)
-                    success_click = true;
+                if (beer) success_click = true;
             }
 
             if (!success_click) 
@@ -55,21 +54,24 @@ namespace V1sonia
 
         private void if_bnt_Click(object sender, EventArgs e) {
             BlockType t = BlockType.SE;
-            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
-            
+            blocks.Add(new Block_img(t, CreateBlock(t), this));
+            blocks[blocks.Count - 1].SetFather(selected_block);
+
             Render();
         }
 
         private void else_bnt_Click(object sender, EventArgs e) {
             BlockType t = BlockType.SE_NAO;
-            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
+            blocks.Add(new Block_img(t, CreateBlock(t), this));
+            blocks[blocks.Count - 1].SetFather(selected_block);
 
             Render();
         }
 
         private void while_bnt_Click(object sender, EventArgs e) {
             BlockType t = BlockType.LOOP;
-            blocks.Add(new Block_img(t, CreateBlock(t), this).SetFather(selected_block));
+            blocks.Add(new Block_img(t, CreateBlock(t), this));
+            blocks[blocks.Count - 1].SetFather(selected_block);
 
             Render();
         }
@@ -120,9 +122,10 @@ namespace V1sonia
             for (int i = 0; i < main.GetChildBlocks().Count; i++) {
                 Point pos = new Point(0, 0);
                 pos.X = group_bnts.Width + 50;
-                pos.Y = (i == 0) ? 120 : 120+60 * i;// 120 * i + blocks[GetIndexBlock(main.GetChildBlocks()[i - 1])].size + 40;
+                pos.Y = (i == 0) ? 120 : 120 + 60 * i + GetYPosition(main.GetChildBlocks()[i]);
 
-                blocks[i].position = pos;
+                int id = blocks.IndexOf(getBlock_img(main.GetChildBlocks()[i]));
+                blocks[id].position = pos;
             }
         }
 
@@ -131,14 +134,22 @@ namespace V1sonia
         }
 
         private void down_Click(object sender, EventArgs e) {
-            global.Y += 10;
+            global.Y -= 10;
             Render();
         }
 
         private void up_Click(object sender, EventArgs e) {
-            global.Y -= 10;
-
+            global.Y += 10;
             Render();
+        }
+
+        private int GetYPosition(Block b) {
+            int att = core.mainBlock.GetChildBlocks().IndexOf(b);
+            if (att == 0) return 0;
+
+            int prev = core.mainBlock.GetChildBlocks().IndexOf(b) - 1;
+
+            return getBlock_img(core.mainBlock.GetChildBlocks()[prev]).size;
         }
     }
 }

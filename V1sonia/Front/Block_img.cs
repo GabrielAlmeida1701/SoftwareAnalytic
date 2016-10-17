@@ -14,8 +14,7 @@ namespace V1sonia.Front {
         public int X = 180;
         public int Y = 30;
         public int size = 30;
-
-        public Point position;
+        public Point position = new Point();
 
         private Rectangle click_box;
 
@@ -27,7 +26,6 @@ namespace V1sonia.Front {
         public Block_img(BlockType type, Block block, Form1 window) {
             this.block = block;
             this.window = window;
-            position = GetStartPosition();
             click_box = new Rectangle(PositionX(), PositionY(), X, Y);
 
             switch (type) {
@@ -50,16 +48,17 @@ namespace V1sonia.Front {
         }
 
         public void DrawBlock(Graphics g) {
+            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
+
             g.DrawImage(top, PositionX(), PositionY(), X, Y);
             g.DrawImage(left, PositionX(), PositionY() + Y, 20, size);
             g.DrawImage(button, PositionX(), PositionY() + Y + size, X, Y/2);
-            
-            if (block == window.getSelect_Block()) {
-                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY()), new Point(PositionX() - 10, PositionY() + 30));//left
-                g.DrawLine(Pens.Red, new Point(PositionX() + X + 10, PositionY()), new Point(PositionX() + X + 10, PositionY() + 30));//right
 
-                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY()), new Point(PositionX() + X + 10, PositionY()));//top
-                g.DrawLine(Pens.Red, new Point(PositionX() - 10, PositionY() + 30), new Point(PositionX() + X + 10, PositionY() + 30));//down
+            if (block == window.getSelect_Block()) {
+                g.DrawLine(Pens.Red, click_box.Location, new Point(click_box.X + click_box.Width, click_box.Y));//top
+                g.DrawLine(Pens.Red, click_box.Location, new Point(click_box.X, click_box.Y + click_box.Height));//left
+                g.DrawLine(Pens.Red, new Point(click_box.X + click_box.Width, click_box.Y + click_box.Height), new Point(click_box.X, click_box.Y + click_box.Height));//down
+                g.DrawLine(Pens.Red, new Point(click_box.X + click_box.Width, click_box.Y), new Point(click_box.X + click_box.Width, click_box.Y + click_box.Height));//right
             }
         }
 
@@ -67,11 +66,18 @@ namespace V1sonia.Front {
             father = block;
 
             if (father != window.core.mainBlock) {
-                position.X += 20;
-                position.Y += 22;
-            }
+                Block_img b_img = window.getBlock_img(father);
+                position = b_img.position;
 
-            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
+                position.X += 20;
+                position.Y = 
+                    window.getBlock_img(block).PositionY() + ChildSize(block) +
+                    ((block.GetChildBlocks().Count == 1)? 0:15 * block.GetChildBlocks().Count);
+            } else {
+                position.X = 20;
+                position.Y = 120 + OthersSize();
+            }
+            
             while (block != window.core.mainBlock) {
                 window.getBlock_img(block).size += 55;
                 block = block.motherBlock;
@@ -99,54 +105,30 @@ namespace V1sonia.Front {
             return click_box.Contains(e);
         }
 
-        public Point GetStartPosition() {
-            Point pos = new Point(0, 0);
-
-            Block mother = block.motherBlock;
-            int final_size = 90;
-            
-            if (window.blocks.Count == 0) {
-                pos.X = window.group_bnts.Width + 50;
-                pos.Y = 120;
-
-                return pos;
-            }
-
-            if (mother.GetChildBlocks().Count == 1) {
-                int index_m = window.core.allBlocks.IndexOf(mother) - 1;
-                
-                pos.X = window.blocks[index_m].position.X;
-                pos.Y = window.blocks[index_m].position.Y;
-
-                return pos;
-            }
-
-            foreach (Block b in mother.GetChildBlocks()) {
-                int index = mother.GetChildBlocks().IndexOf(b);
-                if(index < window.blocks.Count-1) {
-                    final_size += window.blocks[index].size;
-                }
-            }
-
-            Block blk = block.motherBlock;
-            int x = (blk == window.core.mainBlock)? 0 : -20;
-            while(blk != window.core.mainBlock) {
-                x += 20;
-                blk = blk.motherBlock;
-            }
-            
-            pos.X = (window.group_bnts.Width + 50) + x;
-            pos.Y = 90 + final_size - ((window.blocks.Count - 1) * Y);
-
-            return pos;
-        }
-
         public int PositionX() {
             return position.X + window.global.X;
         }
 
         public int PositionY() {
             return position.Y + window.global.Y;
+        }
+
+        private int ChildSize(Block b) {
+            int size_c = 0;
+
+            foreach(Block bk in b.GetChildBlocks()) 
+                size_c += window.getBlock_img(bk).size;
+
+            return size_c;
+        }
+
+        public int OthersSize() {
+            int f_size = 0;
+            int f_id = window.core.mainBlock.GetChildBlocks().IndexOf(block);
+            for (int i = 0; i < f_id; i++) 
+                f_size += window.getBlock_img(window.core.mainBlock.GetChildBlocks()[i]).size;
+
+            return f_size;
         }
     }
 }
