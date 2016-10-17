@@ -15,10 +15,11 @@ namespace V1sonia.Front {
         public int Y = 30;
         public int size = 30;
         public Point position = new Point();
+        public string Text;
 
         private Rectangle click_box;
 
-        Block block;
+        public Block block;
         Block father;
 
         private Form1 window;
@@ -47,12 +48,20 @@ namespace V1sonia.Front {
             }
         }
 
+        public Block_img(Instruction instruction, Form1 window) {
+            this.window = window;
+            click_box = new Rectangle(PositionX(), PositionY(), X, Y);
+        }
+
         public void DrawBlock(Graphics g) {
             click_box = new Rectangle(PositionX(), PositionY(), X, Y);
 
             g.DrawImage(top, PositionX(), PositionY(), X, Y);
             g.DrawImage(left, PositionX(), PositionY() + Y, 20, size);
             g.DrawImage(button, PositionX(), PositionY() + Y + size, X, Y/2);
+
+            if (Text != "")
+                g.DrawString(Text, new Font(FontFamily.Families[3], 18), Brushes.Black, PositionX() + 80, PositionY() + 2);
 
             if (block == window.getSelect_Block()) {
                 g.DrawLine(Pens.Red, click_box.Location, new Point(click_box.X + click_box.Width, click_box.Y));//top

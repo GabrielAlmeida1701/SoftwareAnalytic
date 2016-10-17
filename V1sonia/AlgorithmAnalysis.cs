@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace V1sonia
 {
-    class AlgorithmAnalysis
+    public class AlgorithmAnalysis
     {
         private List<int> complexityList; //lista de complexidades de cada bloco do main
         public Core core;
@@ -15,28 +15,12 @@ namespace V1sonia
         int complexityBlock = 0;
         int complexityAll = 0;
 
-        public AlgorithmAnalysis()
+        public AlgorithmAnalysis(Core core)
         {
-
             nRepeatLoop = 0;
             complexityList = new List<int>();
             nInstrTotal = 0;
-            core = new Core();
-            core.CreateMainBlock();
-
-            Instruction inst = new Instruction("a = 1");
-            Instruction inst2 = new Instruction("b = 3");
-            core.mainBlock.AddInstruction(inst);
-            core.mainBlock.AddInstruction(inst2);
-            core.CreateCondBlock(BlockType.SE, core.mainBlock);
-            core.CreateCondBlock(BlockType.SE, core.mainBlock);
-            core.CreateLoopBlock(BlockType.LOOP, core.allBlocks[2], 10);
-            core.allBlocks[2].GetChildBlocks()[0].AddInstruction(inst2);
-            core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0]);
-            core.CreateCondBlock(BlockType.SE, core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0]);
-            core.allBlocks[2].GetChildBlocks()[0].GetChildBlocks()[0].AddInstruction(inst);
-
-            core.CreateCondBlock(BlockType.SE, core.mainBlock);
+            this.core = core;
         }
 
         public void DefineGeneralComplexity(Block block) //define a complexidade geral de cada bloco de acordo com seu tipo
@@ -175,7 +159,7 @@ namespace V1sonia
             {
                 foreach (Block b in block.GetChildBlocks())
                 {
-                    nInstrTotal += b.GetInstructions().Count();
+                    //nInstrTotal += b.GetInstructions().Count();
                     VerifyAlgorithm(b);
                 }
             }

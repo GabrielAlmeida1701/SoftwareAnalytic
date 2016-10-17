@@ -21,6 +21,7 @@ namespace V1sonia
         public Core core;
 
         Block selected_block;
+        public AlgorithmAnalysis analysis;
 
         public Panel group_bnts;
 
@@ -30,6 +31,7 @@ namespace V1sonia
 
             core = new Core();
             global = new Point();
+            analysis = new AlgorithmAnalysis(core);
 
             core.CreateMainBlock();
             selected_block = core.mainBlock;
@@ -69,14 +71,10 @@ namespace V1sonia
         }
 
         private void while_bnt_Click(object sender, EventArgs e) {
-            BlockType t = BlockType.LOOP;
-            blocks.Add(new Block_img(t, CreateBlock(t), this));
-            blocks[blocks.Count - 1].SetFather(selected_block);
-
-            Render();
+            new InputForm(this, InputBlockType.Loop).Show();
         }
 
-        private void Render() {
+        public void Render() {
             g.Clear(Color.White);
             PreRender(core.mainBlock);
 
@@ -84,7 +82,7 @@ namespace V1sonia
                 b.DrawBlock(g);
         }
 
-        private Block CreateBlock(BlockType type) {
+        public Block CreateBlock(BlockType type) {
             switch (type) {
                 case BlockType.LOOP:
                     return core.CreateLoopBlock(BlockType.LOOP, selected_block, 15);
@@ -150,6 +148,19 @@ namespace V1sonia
             int prev = core.mainBlock.GetChildBlocks().IndexOf(b) - 1;
 
             return getBlock_img(core.mainBlock.GetChildBlocks()[prev]).size;
+        }
+
+        private void instruction_bnt_Click(object sender, EventArgs e) {
+            new InputForm(this, InputBlockType.Instructions).Show();
+        }
+
+        private void analys_bnt_Click(object sender, EventArgs e) {
+            Block main = core.mainBlock;
+            foreach (Block b in main.GetChildBlocks())
+                analysis.VerifyAlgorithm(b);
+
+            compx.Text = 
+            analysis.GetBlockMaxComplexity().blockComplexity.ToString();
         }
     }
 }
