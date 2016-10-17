@@ -25,6 +25,12 @@ namespace V1sonia.Front {
 
         private Form1 window;
 
+        private int instroctions_Height {
+            get {
+                return window.getBlock_img(father).instroctions.Count * Y;
+            }
+        }
+
         public Block_img(BlockType type, Block block, Form1 window) {
             this.block = block;
             this.window = window;
@@ -55,6 +61,7 @@ namespace V1sonia.Front {
             g.DrawImage(top, PositionX(), PositionY(), X, Y);
             g.DrawImage(left, PositionX(), PositionY() + Y, 20, size);
             g.DrawImage(button, PositionX(), PositionY() + Y + size, X, Y/2);
+            DrawInstructions(g);
 
             if (Text != "")
                 g.DrawString(Text, new Font(FontFamily.Families[3], 18), Brushes.Black, PositionX() + 80, PositionY() + 2);
@@ -75,9 +82,11 @@ namespace V1sonia.Front {
                 position = b_img.position;
 
                 position.X += 20;
-                position.Y = 
+                position.Y = instroctions_Height + 
                     window.getBlock_img(block).PositionY() + ChildSize(block) +
-                    ((block.GetChildBlocks().Count == 1)? 0:15 * block.GetChildBlocks().Count);
+                    ((block.GetChildBlocks().Count == 1)? 0 : 15 * block.GetChildBlocks().Count);
+
+                Console.WriteLine(instroctions.Count);
             } else {
                 position.X = 20;
                 position.Y = 120 + OthersSize();
@@ -91,14 +100,19 @@ namespace V1sonia.Front {
             return this;
         }
 
-        int GetHeight() {
-            int childCount = block.GetChildBlocks().Count;
-            for (int i = 0; i < block.GetChildBlocks().Count; i++)
-                childCount += block.GetChildBlocks()[i].GetChildBlocks().Count;
+        public void AddInstruction(Instruction ins) {
+            size += Y;
+            instroctions.Add(ins);
+            block.AddInstruction(ins);
+        }
 
-            childCount = (childCount != 0) ? childCount * 30 + 90 : 30;
+        public void DrawInstructions(Graphics g) {
+            foreach (Instruction ins in instroctions) {
+                g.DrawImage(Properties.Resources.inst,
+                    PositionX() + 20, PositionY() + Y + (instroctions.IndexOf(ins) * Y), X, Y);
 
-            return childCount;
+                g.DrawString(ins.inst, new Font(FontFamily.Families[0], 18), Brushes.Black, PositionX() + 30, PositionY() + Y + (instroctions.IndexOf(ins) * Y));
+            }
         }
 
         public bool CheckClicks(Point e) {

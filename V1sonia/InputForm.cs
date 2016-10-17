@@ -60,9 +60,13 @@ namespace V1sonia {
         }
 
         private void instruction_box() {
-            if (label1.Text == "") return;
+            if (InputField.Text == "") return;
 
-            form.getSelect_Block().AddInstruction(new Instruction(label1.Text));
+            if (form.getSelect_Block() != form.core.mainBlock) {
+                Instruction ins = new Instruction(InputField.Text);
+                ins.block = form.getSelect_Block();
+                form.getBlock_img(form.getSelect_Block()).AddInstruction(ins);
+            } else;
 
             form.Render();
             Close();
