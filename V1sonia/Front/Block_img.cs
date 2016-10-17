@@ -73,7 +73,7 @@ namespace V1sonia.Front {
 
             click_box = new Rectangle(PositionX(), PositionY(), X, Y);
             while (block != window.core.mainBlock) {
-                window.getBlock_img(father).size += 55;
+                window.getBlock_img(block).size += 55;
                 block = block.motherBlock;
             }
 
